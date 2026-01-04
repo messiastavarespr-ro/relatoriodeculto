@@ -1,0 +1,5 @@
+{
+  "name": "Relatório de Culto MVPfin",
+  "description": "Sistema administrativo para registro e geração de relatórios financeiros de cultos com integração para WhatsApp.",
+  "requestFramePermissions": []
+}
