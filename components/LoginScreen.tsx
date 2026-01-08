@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { supabase } from '../src/lib/supabase';
+import { User } from '../types';
 
 interface LoginScreenProps {
-    onLoginSuccess: () => void;
+    onLoginSuccess: (user: User) => void;
     onBack: () => void;
 }
 
@@ -28,7 +29,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess, onBack }) => 
             if (error || !data) {
                 setError(true);
             } else {
-                onLoginSuccess();
+                onLoginSuccess(data);
             }
         } catch (err) {
             console.error("Login error:", err);

@@ -158,7 +158,10 @@ const App: React.FC = () => {
   if (!isAuthenticated) {
     return (
       <LoginScreen
-        onLoginSuccess={() => setIsAuthenticated(true)}
+        onLoginSuccess={(user) => {
+          setIsAuthenticated(true);
+          setReport(prev => ({ ...prev, responsible: user.name }));
+        }}
         onBack={() => { }}
       />
     );
@@ -257,14 +260,15 @@ const App: React.FC = () => {
                   {users.length > 0 ? (
                     <select
                       value={report.responsible}
+                      disabled
                       onChange={(e) => setReport({ ...report, responsible: e.target.value })}
-                      className="px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none dark:text-white"
+                      className="px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none dark:text-white opacity-70 cursor-not-allowed"
                     >
                       <option value="">Selecione um responsável...</option>
                       {users.map(u => <option key={u.id} value={u.name}>{u.name}</option>)}
                     </select>
                   ) : (
-                    <input type="text" placeholder="Cadastre usuários no Admin" value={report.responsible} onChange={(e) => setReport({ ...report, responsible: e.target.value })} className="px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none dark:text-white" />
+                    <input type="text" disabled placeholder="Cadastre usuários no Admin" value={report.responsible} onChange={(e) => setReport({ ...report, responsible: e.target.value })} className="px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none dark:text-white opacity-70 cursor-not-allowed" />
                   )}
                 </div>
               </div>
